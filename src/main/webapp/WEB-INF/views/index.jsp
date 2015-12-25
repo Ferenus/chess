@@ -3,8 +3,10 @@
   <head>
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700" rel="stylesheet" type="text/css" />
     <link href="assets/style.css" rel="stylesheet" type="text/css" />
+    <script src="libs/jquery/jquery.min.js"></script>
   </head>
   <body ng-app="chatApp">
+  <div class="parent">
   <div class="chessboard">
     <!-- 1st -->
     <div class="white">&#9820;</div>
@@ -94,7 +96,7 @@
         <span ng-class="{self: message.self}">{{message.message}}</span>
       </p>
     </div>
-
+  </div>
     
     <script src="libs/sockjs/sockjs.min.js" type="text/javascript"></script>
     <script src="libs/stomp-websocket/lib/stomp.min.js" type="text/javascript"></script>
@@ -103,5 +105,6 @@
     <script src="app/app.js" type="text/javascript"></script>
     <script src="app/controllers.js" type="text/javascript"></script>
     <script src="app/services.js" type="text/javascript"></script>
+    <script src="libs/jquery/jquery.js"></script>
   </body>
 </html>
