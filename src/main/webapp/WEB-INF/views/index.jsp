@@ -8,78 +8,78 @@
   <body ng-app="chatApp">
   <div class="parent">
   <div class="chessboard">
-    <!-- 1st -->
-    <div class="white">&#9820;</div>
-    <div class="black">&#9822;</div>
-    <div class="white">&#9821;</div>
-    <div class="black">&#9819;</div>
-    <div class="white">&#9818;</div>
-    <div class="black">&#9821;</div>
-    <div class="white">&#9822;</div>
-    <div class="black">&#9820;</div>
-    <!-- 2nd -->
-    <div class="black">&#9823;</div>
-    <div class="white">&#9823;</div>
-    <div class="black">&#9823;</div>
-    <div class="white">&#9823;</div>
-    <div class="black">&#9823;</div>
-    <div class="white">&#9823;</div>
-    <div class="black">&#9823;</div>
-    <div class="white">&#9823;</div>
-    <!-- 3th -->
-    <div class="white"></div>
-    <div class="black"></div>
-    <div class="white"></div>
-    <div class="black"></div>
-    <div class="white"></div>
-    <div class="black"></div>
-    <div class="white"></div>
-    <div class="black"></div>
-    <!-- 4st -->
-    <div class="black"></div>
-    <div class="white"></div>
-    <div class="black"></div>
-    <div class="white"></div>
-    <div class="black"></div>
-    <div class="white"></div>
-    <div class="black"></div>
-    <div class="white"></div>
-    <!-- 5th -->
-    <div class="white"></div>
-    <div class="black"></div>
-    <div class="white"></div>
-    <div class="black"></div>
-    <div class="white"></div>
-    <div class="black"></div>
-    <div class="white"></div>
-    <div class="black"></div>
+    <!-- 8st -->
+    <div class="white" id="A8">&#9820;</div>
+    <div class="black" id="B8">&#9822;</div>
+    <div class="white" id="C8">&#9821;</div>
+    <div class="black" id="D8">&#9819;</div>
+    <div class="white" id="E8">&#9818;</div>
+    <div class="black" id="F8">&#9821;</div>
+    <div class="white" id="G8">&#9822;</div>
+    <div class="black" id="H8">&#9820;</div>
+    <!-- 7nd -->
+    <div class="black" id="A7">&#9823;</div>
+    <div class="white" id="B7">&#9823;</div>
+    <div class="black" id="C7">&#9823;</div>
+    <div class="white" id="D7">&#9823;</div>
+    <div class="black" id="E7">&#9823;</div>
+    <div class="white" id="F7">&#9823;</div>
+    <div class="black" id="G7">&#9823;</div>
+    <div class="white" id="H7">&#9823;</div>
     <!-- 6th -->
-    <div class="black"></div>
-    <div class="white"></div>
-    <div class="black"></div>
-    <div class="white"></div>
-    <div class="black"></div>
-    <div class="white"></div>
-    <div class="black"></div>
-    <div class="white"></div>
-    <!-- 7th -->
-    <div class="white">&#9817;</div>
-    <div class="black">&#9817;</div>
-    <div class="white">&#9817;</div>
-    <div class="black">&#9817;</div>
-    <div class="white">&#9817;</div>
-    <div class="black">&#9817;</div>
-    <div class="white">&#9817;</div>
-    <div class="black">&#9817;</div>
-    <!-- 8th -->
-    <div class="black">&#9814;</div>
-    <div class="white">&#9816;</div>
-    <div class="black">&#9815;</div>
-    <div class="white">&#9813;</div>
-    <div class="black">&#9812;</div>
-    <div class="white">&#9815;</div>
-    <div class="black">&#9816;</div>
-    <div class="white">&#9814;</div>
+    <div class="white" id="A6"></div>
+    <div class="black" id="B6"></div>
+    <div class="white" id="C6"></div>
+    <div class="black" id="D6"></div>
+    <div class="white" id="E6"></div>
+    <div class="black" id="F6"></div>
+    <div class="white" id="G6"></div>
+    <div class="black" id="H6"></div>
+    <!-- 5st -->
+    <div class="black" id="A5"></div>
+    <div class="white" id="B5"></div>
+    <div class="black" id="C5"></div>
+    <div class="white" id="D5"></div>
+    <div class="black" id="E5"></div>
+    <div class="white" id="F5"></div>
+    <div class="black" id="G5"></div>
+    <div class="white" id="H5"></div>
+    <!-- 4th -->
+    <div class="white" id="A4"></div>
+    <div class="black" id="B4"></div>
+    <div class="white" id="C4"></div>
+    <div class="black" id="D4"></div>
+    <div class="white" id="E4"></div>
+    <div class="black" id="F4"></div>
+    <div class="white" id="G4"></div>
+    <div class="black" id="H4"></div>
+    <!-- 3th -->
+    <div class="black" id="A3"></div>
+    <div class="white" id="B3"></div>
+    <div class="black" id="C3"></div>
+    <div class="white" id="D3"></div>
+    <div class="black" id="E3"></div>
+    <div class="white" id="F3"></div>
+    <div class="black" id="G3"></div>
+    <div class="white" id="H3"></div>
+    <!-- 2th -->
+    <div class="white" id="A2">&#9817;</div>
+    <div class="black" id="B2">&#9817;</div>
+    <div class="white" id="C2">&#9817;</div>
+    <div class="black" id="D2">&#9817;</div>
+    <div class="white" id="E2">&#9817;</div>
+    <div class="black" id="F2">&#9817;</div>
+    <div class="white" id="G2">&#9817;</div>
+    <div class="black" id="H2">&#9817;</div>
+    <!-- 1th -->
+    <div class="black" id="A1">&#9814;</div>
+    <div class="white" id="B1">&#9816;</div>
+    <div class="black" id="C1">&#9815;</div>
+    <div class="white" id="D1">&#9813;</div>
+    <div class="black" id="E1">&#9812;</div>
+    <div class="white" id="F1">&#9815;</div>
+    <div class="black" id="G1">&#9816;</div>
+    <div class="white" id="H1">&#9814;</div>
   </div>
 
     <div ng-controller="ChatCtrl" class="container">
@@ -105,6 +105,6 @@
     <script src="app/app.js" type="text/javascript"></script>
     <script src="app/controllers.js" type="text/javascript"></script>
     <script src="app/services.js" type="text/javascript"></script>
-    <script src="libs/jquery/jquery.js"></script>
+    <script src="app/jquery.js"></script>
   </body>
 </html>

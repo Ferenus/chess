@@ -22,10 +22,6 @@ body, * {
   width: 100%;
 }
 
-.white:hover:not(:empty), .black:hover:not(:empty) {
-  background: #1c82dd;
-}
-
 input[type=text] {
   width: 100%;
   border: solid 1px #D4D4D1;
@@ -143,4 +139,16 @@ hr {
   text-align:center;
   display: table-cell;
   vertical-align:middle;
+}
+
+.selected {
+  float: left;
+  width: 80px;
+  height: 80px;
+  background-color: lightgreen;
+  font-size:50px;
+  text-align:center;
+  display: table-cell;
+  vertical-align:middle;
+  border: 1px solid green;
 }

@@ -26,4 +26,11 @@ public class ChatController {
     logger.info("Message sent");
     return new OutputMessage(message, new Date());
   }
+
+  @MessageMapping("/game")
+  @SendTo("/topic/move")
+  public Move sendMove(Move move) {
+    logger.info("Move sent");
+    return move;
+  }
 }
