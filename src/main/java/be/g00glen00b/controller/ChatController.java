@@ -41,7 +41,7 @@ public class ChatController {
 
     @MessageMapping("/game")
     @SendTo("/topic/move")
-    public Move sendMove(Move move) {
+    public Message sendMove(Message move) {
         logger.info("Move sent");
         return move;
     }
