@@ -13,14 +13,21 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, C
     });
 }).controller("MoveCtrl", function ($scope, MoveService) {
     $scope.moves = [];
-    $scope.move = "";
 
-    $scope.addMove = function () {
-/*        MoveService.send($scope.start);
-        MoveService.send($scope.end);
-        MoveService.send($scope.chessPiece);*/
-        MoveService.send($scope.move);
-        $scope.move = "";
+    $scope.addMove = function (event) {
+        var element = event.target;
+        var selected = $(".selected");
+        if (selected.length != 0) {
+            var piece = selected.html();
+            var start = selected.attr('id');
+            selected.empty().toggleClass("selected");
+            element.innerText = piece;
+            MoveService.send(piece + start +"-"+ element.id);
+        } else if (element.innerText.length != 0) {
+            element.classList.toggle("selected");
+            selected.css("background", "");
+            MoveService.send("selected field: " + element.id);
+        }
     };
 
     MoveService.receive().then(null, null, function (move) {

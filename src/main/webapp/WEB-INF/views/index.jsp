@@ -10,7 +10,7 @@
 <body ng-app="chatApp">
 <div class="parent">
     <div ng-controller="MoveCtrl" class="chessboard">
-        <form ng-submit="addMove()" name="moveForm">
+        <div ng-click="addMove($event)">
         <!-- 8st -->
         <div class="white" id="A8">&#9820;</div>
         <div class="black" id="B8">&#9822;</div>
@@ -83,12 +83,7 @@
         <div class="white" id="F1">&#9815;</div>
         <div class="black" id="G1">&#9816;</div>
         <div class="white" id="H1">&#9814;</div>
-
-            <input type="text" placeholder="Move..." ng-model="move"/>
-            <div class="info">
-                <button>Make Move</button>
-            </div>
-        </form>
+        </div>
         <p ng-repeat="move in moves" class="message">
             <span ng-class="{self: move.self}">{{move.message}}</span>
         </p>
