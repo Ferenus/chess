@@ -4,3 +4,4 @@ src/main/webapp/libs
 .classpath
 .project
 .iml
+/workspace.xml

@@ -1,17 +1,19 @@
-angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, ChatService) {
+angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, GameService) {
     $scope.messages = [];
     $scope.message = "";
     $scope.max = 140;
 
     $scope.addMessage = function () {
-        ChatService.send($scope.message);
+        GameService.sendMessage($scope.message);
         $scope.message = "";
     };
 
-    ChatService.receive().then(null, null, function (message) {
-        $scope.messages.push(message);
+    GameService.receive().then(null, null, function (message) {
+        if (message.action === "message") {
+            $scope.messages.push(message);
+        }
     });
-}).controller("MoveCtrl", function ($scope, MoveService) {
+}).controller("MoveCtrl", function ($scope, GameService) {
     $scope.moves = [];
 
     $scope.addMove = function (event) {
@@ -22,16 +24,18 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, C
             var start = selected.attr('id');
             selected.empty().toggleClass("selected");
             element.innerText = piece;
-            MoveService.send(piece + start +"-"+ element.id);
+            GameService.sendMove(piece + start + "-" + element.id);
         } else if (element.innerText.length != 0) {
             element.classList.toggle("selected");
             selected.css("background", "");
-            MoveService.send("selected field: " + element.id);
+            GameService.sendMove("selected field: " + element.id);
         }
     };
 
-    MoveService.receive().then(null, null, function (move) {
-        $scope.moves.push(move);
+    GameService.receive().then(null, null, function (move) {
+        if (move.action === "move") {
+            $scope.moves.push(move);
+        }
     });
 });
 
