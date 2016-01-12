@@ -1,14 +1,14 @@
-package be.g00glen00b.controller;
+package com.danielstradowski.controller;
 
 import java.util.*;
 
+import com.danielstradowski.dto.Message;
+import com.danielstradowski.dto.OutputMessage;
 import org.slf4j.*;
 import org.springframework.messaging.handler.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import be.g00glen00b.dto.*;
 
 @Controller
 @RequestMapping("/")

@@ -1,4 +1,4 @@
-package be.g00glen00b.config;
+package com.danielstradowski.config;
 
 import org.springframework.context.annotation.*;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
@@ -6,7 +6,7 @@ import org.springframework.web.socket.config.annotation.*;
 
 @Configuration
 @EnableWebSocketMessageBroker
-@ComponentScan(basePackages = "be.g00glen00b.controller")
+@ComponentScan(basePackages = "com.danielstradowski.controller")
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
 
   @Override

@@ -1,10 +1,10 @@
-package be.g00glen00b.config;
+package com.danielstradowski.config;
 
 import org.springframework.context.annotation.*;
 import org.springframework.stereotype.Controller;
 
 @Configuration
-@ComponentScan(basePackages = "be.g00glen00b", excludeFilters = {
+@ComponentScan(basePackages = "com.danielstradowski", excludeFilters = {
     @ComponentScan.Filter(value = Controller.class, type = FilterType.ANNOTATION),
     @ComponentScan.Filter(value = Configuration.class, type = FilterType.ANNOTATION)
 })

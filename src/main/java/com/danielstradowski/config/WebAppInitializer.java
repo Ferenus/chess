@@ -1,4 +1,4 @@
-package be.g00glen00b.config;
+package com.danielstradowski.config;
 
 import java.nio.charset.StandardCharsets;
 

@@ -1,4 +1,4 @@
-package be.g00glen00b.dto;
+package com.danielstradowski.dto;
 
 public class Move {
 

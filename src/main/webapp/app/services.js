@@ -6,7 +6,7 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
     }, messageIds = [];
 
     service.RECONNECT_TIMEOUT = 30000;
-    service.SOCKET_URL = "/spring-ng-chat/chat";
+    service.SOCKET_URL = "/chess/chat";
     service.CHAT_TOPIC = "/topic/message";
     service.CHAT_BROKER = "/app/chat";
     service.MOVE_TOPIC = "/topic/move";
