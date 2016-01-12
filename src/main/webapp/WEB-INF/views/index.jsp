@@ -85,7 +85,7 @@
         <div class="white" id="H1">&#9814;</div>
         </div>
         <p ng-repeat="move in moves" class="message">
-            <span ng-class="{self: move.self}">{{move.message}}</span>
+            <span ng-class="{self: move.self}">{{move.chessPiece}} {{move.start}}-{{move.end}}</span>
         </p>
     </div>
 

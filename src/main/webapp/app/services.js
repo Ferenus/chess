@@ -27,12 +27,14 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
         messageIds.push(id);
     };
 
-    service.sendMove = function (message) {
+    service.sendMove = function (chessPiece, start, end) {
         var id = Math.floor(Math.random() * 1000000);
         socket.stomp.send(service.MOVE_BROKER, {
             priority: 9
         }, JSON.stringify({
-            message: message,
+            chessPiece: chessPiece,
+            start: start,
+            end: end,
             id: id
         }));
         messageIds.push(id);
@@ -57,12 +59,14 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
     };
 
     var getMove = function (data) {
-        var message = JSON.parse(data), out = {};
-        out.message = message.message;
+        var move = JSON.parse(data), out = {};
+        out.chessPiece = move.chessPiece;
+        out.start = move.start;
+        out.end = move.end;
         out.action = "move";
-        if (_.contains(messageIds, message.id)) {
+        if (_.contains(messageIds, move.id)) {
             out.self = true;
-            messageIds = _.remove(messageIds, message.id);
+            messageIds = _.remove(messageIds, move.id);
         }
         return out;
     };

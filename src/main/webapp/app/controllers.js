@@ -20,15 +20,16 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
         var element = event.target;
         var selected = $(".selected");
         if (selected.length != 0) {
-            var piece = selected.html();
+            var chessPiece = selected.html();
             var start = selected.attr('id');
             selected.empty().toggleClass("selected");
-            element.innerText = piece;
-            GameService.sendMove(piece + start + "-" + element.id);
+            element.innerText = chessPiece;
+            var end = element.id;
+            GameService.sendMove(chessPiece, start, end);
         } else if (element.innerText.length != 0) {
             element.classList.toggle("selected");
             selected.css("background", "");
-            GameService.sendMove("selected field: " + element.id);
+            GameService.sendMessage("selected field: " + element.id);
         }
     };
 

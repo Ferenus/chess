@@ -3,6 +3,7 @@ package com.danielstradowski.controller;
 import java.util.*;
 
 import com.danielstradowski.dto.Message;
+import com.danielstradowski.dto.Move;
 import com.danielstradowski.dto.OutputMessage;
 import org.slf4j.*;
 import org.springframework.messaging.handler.annotation.*;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/")
-public class ChatController {
+public class GameController {
 
     private static String[][] chessboard = new String[8][8];
     private static List<OutputMessage> msgList = new ArrayList<>();
@@ -41,7 +42,7 @@ public class ChatController {
 
     @MessageMapping("/move")
     @SendTo("/topic/move")
-    public Message sendMove(Message move) {
+    public Move sendMove(Move move) {
         logger.info("Move sent");
         return move;
     }
