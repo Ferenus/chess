@@ -7,6 +7,14 @@
     <link href="assets/style.css" rel="stylesheet" type="text/css"/>
     <script src="libs/jquery/jquery.min.js"></script>
 </head>
+<script language="javascript">
+window.onload = function () {
+    var selection = "${selection}";
+    if (selection != "off" && selection != null) {
+        $("#" + selection).toggleClass("selected");
+    }
+};
+</script>
 <body ng-app="chatApp">
 <div class="parent">
     <div ng-controller="MoveCtrl" class="chessboard">

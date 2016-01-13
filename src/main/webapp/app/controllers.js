@@ -44,7 +44,7 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
             if (selected.length != 0) {
                 selected.toggleClass("selected");
             } else {
-                $("#"+selection).toggleClass("selected");
+                $("#" + selection).toggleClass("selected");
             }
         }
     });

@@ -17,6 +17,7 @@ public class GameController {
 
     private static String[][] chessboard = new String[8][8];
     private static List<OutputMessage> msgList = new ArrayList<>();
+    private static String selection;
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @RequestMapping(method = RequestMethod.GET)
@@ -24,6 +25,7 @@ public class GameController {
         List<OutputMessage> copy = new ArrayList<>(msgList);
         Collections.reverse(copy);
         model.addAttribute("msgList", copy);
+        model.addAttribute("selection", selection);
         return "index";
     }
 
@@ -51,6 +53,7 @@ public class GameController {
     @SendTo("/topic/selection")
     public Message sendSelection(Message selection) {
         logger.info("Selection sent");
+        GameController.selection = selection.getMessage();
         return selection;
     }
 }
