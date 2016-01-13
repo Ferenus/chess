@@ -23,19 +23,29 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
             var chessPiece = selected.html();
             var start = selected.attr('id');
             selected.empty().toggleClass("selected");
+            GameService.sendSelection("off");
             element.innerText = chessPiece;
             var end = element.id;
             GameService.sendMove(chessPiece, start, end);
         } else if (element.innerText.length != 0) {
             element.classList.toggle("selected");
             selected.css("background", "");
-            GameService.sendMessage("selected field: " + element.id);
+            GameService.sendSelection(element.id);
         }
     };
 
     GameService.receive().then(null, null, function (move) {
         if (move.action === "move") {
             $scope.moves.push(move);
+        }
+        if (move.action === "selection" && move.self != true) {
+            var selection = move.selection;
+            var selected = $(".selected");
+            if (selected.length != 0) {
+                selected.toggleClass("selected");
+            } else {
+                $("#"+selection).toggleClass("selected");
+            }
         }
     });
 });

@@ -46,4 +46,11 @@ public class GameController {
         logger.info("Move sent");
         return move;
     }
+
+    @MessageMapping("/selection")
+    @SendTo("/topic/selection")
+    public Message sendSelection(Message selection) {
+        logger.info("Selection sent");
+        return selection;
+    }
 }

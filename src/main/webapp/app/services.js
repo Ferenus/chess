@@ -3,7 +3,7 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
     var service = {}, listener = $q.defer(), socket = {
         client: null,
         stomp: null
-    }, messageIds = [];
+    }, ids = [];
 
     service.RECONNECT_TIMEOUT = 30000;
     service.SOCKET_URL = "/chess/chat";
@@ -11,6 +11,8 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
     service.CHAT_BROKER = "/app/chat";
     service.MOVE_TOPIC = "/topic/move";
     service.MOVE_BROKER = "/app/move";
+    service.SELECTION_BROKER = "/app/selection";
+    service.SELECTION_TOPIC = "/topic/selection";
 
     service.receive = function () {
         return listener.promise;
@@ -24,7 +26,7 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
             message: message,
             id: id
         }));
-        messageIds.push(id);
+        ids.push(id);
     };
 
     service.sendMove = function (chessPiece, start, end) {
@@ -37,7 +39,18 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
             end: end,
             id: id
         }));
-        messageIds.push(id);
+        ids.push(id);
+    };
+
+    service.sendSelection = function (fieldId) {
+        var id = Math.floor(Math.random() * 1000000);
+        socket.stomp.send(service.SELECTION_BROKER, {
+            priority: 9
+        }, JSON.stringify({
+            message: fieldId,
+            id: id
+        }));
+        ids.push(id);
     };
 
     var reconnect = function () {
@@ -51,9 +64,9 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
         out.message = message.message;
         out.time = new Date(message.time);
         out.action = "message";
-        if (_.contains(messageIds, message.id)) {
+        if (_.contains(ids, message.id)) {
             out.self = true;
-            messageIds = _.remove(messageIds, message.id);
+            ids = _.remove(ids, message.id);
         }
         return out;
     };
@@ -64,9 +77,20 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
         out.start = move.start;
         out.end = move.end;
         out.action = "move";
-        if (_.contains(messageIds, move.id)) {
+        if (_.contains(ids, move.id)) {
             out.self = true;
-            messageIds = _.remove(messageIds, move.id);
+            ids = _.remove(ids, move.id);
+        }
+        return out;
+    };
+
+    var getSelection = function (data) {
+        var selection = JSON.parse(data), out = {};
+        out.selection = selection.message;
+        out.action = "selection";
+        if (_.contains(ids, selection.id)) {
+            out.self = true;
+            ids = _.remove(ids, selection.id);
         }
         return out;
     };
@@ -77,6 +101,9 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
         });
         socket.stomp.subscribe(service.MOVE_TOPIC, function (data) {
             listener.notify(getMove(data.body));
+        });
+        socket.stomp.subscribe(service.SELECTION_TOPIC, function (data) {
+            listener.notify(getSelection(data.body));
         });
     };
 
