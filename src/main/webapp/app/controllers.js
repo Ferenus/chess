@@ -14,8 +14,6 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
         }
     });
 }).controller("MoveCtrl", function ($scope, GameService) {
-    $scope.moves = [];
-
     $scope.addMove = function (event) {
         var element = event.target;
         var selected = $(".selected");
@@ -35,8 +33,12 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
     };
 
     GameService.receive().then(null, null, function (move) {
-        if (move.action === "move") {
-            $scope.moves.push(move);
+        if (move.action === "move" && move.self != true) {
+            var chessPiece = move.chessPiece;
+            var start = move.start;
+            var end = move.end;
+            $("#" + start).empty();
+            $("#" + end).text(chessPiece);
         }
         if (move.action === "selection" && move.self != true) {
             var selection = move.selection;

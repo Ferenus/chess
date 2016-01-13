@@ -92,9 +92,9 @@ window.onload = function () {
         <div class="black" id="G1">&#9816;</div>
         <div class="white" id="H1">&#9814;</div>
         </div>
-        <p ng-repeat="move in moves" class="message">
+<%--        <p ng-repeat="move in moves" class="message">
             <span ng-class="{self: move.self}">{{move.chessPiece}} {{move.start}}-{{move.end}}</span>
-        </p>
+        </p>--%>
     </div>
 
     <div ng-controller="ChatCtrl" class="container">
