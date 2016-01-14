@@ -23,14 +23,14 @@ public class GameController {
     static
     {
         board = new HashMap<String, String>();
-        board.put("A1", "&#9814;");board.put("B1", "&#9816;");board.put("C1", "&#9815;");board.put("D1", "&#9813;");board.put("E1", "&#9812;");board.put("F1", "&#9815;");board.put("G1", "&#9816;");board.put("H1", "&#9814;");
-        board.put("A2", "&#9817;");board.put("B2", "&#9817;");board.put("C2", "&#9817;");board.put("D2", "&#9817;");board.put("E2", "&#9817;");board.put("F2", "&#9817;");board.put("G2", "&#9817;");board.put("H2", "&#9817;");
+        board.put("A1", "♖");board.put("B1", "♘");board.put("C1", "♗");board.put("D1", "♕");board.put("E1", "♔");board.put("F1", "♗");board.put("G1", "♘");board.put("H1", "♖");
+        board.put("A2", "♙");board.put("B2", "♙");board.put("C2", "♙");board.put("D2", "♙");board.put("E2", "♙");board.put("F2", "♙");board.put("G2", "♙");board.put("H2", "♙");
         board.put("A3", "");board.put("B3", "");board.put("C3", "");board.put("D3", "");board.put("E3", "");board.put("F3", "");board.put("G3", "");board.put("H3", "");
         board.put("A4", "");board.put("B4", "");board.put("C4", "");board.put("D4", "");board.put("E4", "");board.put("F4", "");board.put("G4", "");board.put("H4", "");
         board.put("A5", "");board.put("B5", "");board.put("C5", "");board.put("D5", "");board.put("E5", "");board.put("F5", "");board.put("G5", "");board.put("H5", "");
         board.put("A6", "");board.put("B6", "");board.put("C6", "");board.put("D6", "");board.put("E6", "");board.put("F6", "");board.put("G6", "");board.put("H6", "");
-        board.put("A7", "?");board.put("B7", "\u265F");board.put("C7", "&#9823;");board.put("D7", "&#9823;");board.put("E7", "&#9823;");board.put("F7", "&#9823;");board.put("G7", "&#9823;");board.put("H7", "&#9823;");
-        board.put("A8", "&#9820;");board.put("B8", "&#9822;");board.put("C8", "&#9821;");board.put("D8", "&#9819;");board.put("E8", "&#9818;");board.put("F8", "&#9821;");board.put("G8", "&#9822;");board.put("H8", "&#9820;");
+        board.put("A7", "♟");board.put("B7", "♟");board.put("C7", "♟");board.put("D7", "♟");board.put("E7", "♟");board.put("F7", "♟");board.put("G7", "♟");board.put("H7", "♟");
+        board.put("A8", "♜");board.put("B8", "♞");board.put("C8", "♝");board.put("D8", "♛");board.put("E8", "♚");board.put("F8", "♝");board.put("G8", "♞");board.put("H8", "♜");
     }
     private static List<OutputMessage> msgList = new ArrayList<>();
     private static String selection;
