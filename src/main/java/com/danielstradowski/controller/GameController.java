@@ -64,7 +64,7 @@ public class GameController {
     @SendTo("/topic/move")
     public Move sendMove(Move move) {
         logger.info("Move sent");
-        board.put(move.getEnd(), "");
+        board.put(move.getStart(), "");
         board.put(move.getEnd(), move.getChessPiece());
         return move;
     }
