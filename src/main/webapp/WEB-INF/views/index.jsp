@@ -10,9 +10,13 @@
 <script language="javascript">
 window.onload = function () {
     var selection = "${selection}";
+    var board = ${board};
     if (selection != "off" && selection != null) {
         $("#" + selection).toggleClass("selected");
     }
+    $.each( board, function(index,value){
+        $("#" + index).text(value);
+    })
 };
 </script>
 <body ng-app="chatApp">
@@ -20,23 +24,23 @@ window.onload = function () {
     <div ng-controller="MoveCtrl" class="chessboard">
         <div ng-click="addMove($event)">
         <!-- 8st -->
-        <div class="white" id="A8">&#9820;</div>
-        <div class="black" id="B8">&#9822;</div>
-        <div class="white" id="C8">&#9821;</div>
-        <div class="black" id="D8">&#9819;</div>
-        <div class="white" id="E8">&#9818;</div>
-        <div class="black" id="F8">&#9821;</div>
-        <div class="white" id="G8">&#9822;</div>
-        <div class="black" id="H8">&#9820;</div>
+        <div class="white" id="A8"></div>
+        <div class="black" id="B8"></div>
+        <div class="white" id="C8"></div>
+        <div class="black" id="D8"></div>
+        <div class="white" id="E8"></div>
+        <div class="black" id="F8"></div>
+        <div class="white" id="G8"></div>
+        <div class="black" id="H8"></div>
         <!-- 7nd -->
-        <div class="black" id="A7">&#9823;</div>
-        <div class="white" id="B7">&#9823;</div>
-        <div class="black" id="C7">&#9823;</div>
-        <div class="white" id="D7">&#9823;</div>
-        <div class="black" id="E7">&#9823;</div>
-        <div class="white" id="F7">&#9823;</div>
-        <div class="black" id="G7">&#9823;</div>
-        <div class="white" id="H7">&#9823;</div>
+        <div class="black" id="A7"></div>
+        <div class="white" id="B7"></div>
+        <div class="black" id="C7"></div>
+        <div class="white" id="D7"></div>
+        <div class="black" id="E7"></div>
+        <div class="white" id="F7"></div>
+        <div class="black" id="G7"></div>
+        <div class="white" id="H7"></div>
         <!-- 6th -->
         <div class="white" id="A6"></div>
         <div class="black" id="B6"></div>
@@ -74,27 +78,24 @@ window.onload = function () {
         <div class="black" id="G3"></div>
         <div class="white" id="H3"></div>
         <!-- 2th -->
-        <div class="white" id="A2">&#9817;</div>
-        <div class="black" id="B2">&#9817;</div>
-        <div class="white" id="C2">&#9817;</div>
-        <div class="black" id="D2">&#9817;</div>
-        <div class="white" id="E2">&#9817;</div>
-        <div class="black" id="F2">&#9817;</div>
-        <div class="white" id="G2">&#9817;</div>
-        <div class="black" id="H2">&#9817;</div>
+        <div class="white" id="A2"></div>
+        <div class="black" id="B2"></div>
+        <div class="white" id="C2"></div>
+        <div class="black" id="D2"></div>
+        <div class="white" id="E2"></div>
+        <div class="black" id="F2"></div>
+        <div class="white" id="G2"></div>
+        <div class="black" id="H2"></div>
         <!-- 1th -->
-        <div class="black" id="A1">&#9814;</div>
-        <div class="white" id="B1">&#9816;</div>
-        <div class="black" id="C1">&#9815;</div>
-        <div class="white" id="D1">&#9813;</div>
-        <div class="black" id="E1">&#9812;</div>
-        <div class="white" id="F1">&#9815;</div>
-        <div class="black" id="G1">&#9816;</div>
-        <div class="white" id="H1">&#9814;</div>
+        <div class="black" id="A1"></div>
+        <div class="white" id="B1"></div>
+        <div class="black" id="C1"></div>
+        <div class="white" id="D1"></div>
+        <div class="black" id="E1"></div>
+        <div class="white" id="F1"></div>
+        <div class="black" id="G1"></div>
+        <div class="white" id="H1"></div>
         </div>
-<%--        <p ng-repeat="move in moves" class="message">
-            <span ng-class="{self: move.self}">{{move.chessPiece}} {{move.start}}-{{move.end}}</span>
-        </p>--%>
     </div>
 
     <div ng-controller="ChatCtrl" class="container">
