@@ -22,7 +22,7 @@ public class GameController {
     private static final Map<String, String> board;
     static
     {
-        board = new HashMap<String, String>();
+        board = new HashMap<>();
         board.put("A1", "♖");board.put("B1", "♘");board.put("C1", "♗");board.put("D1", "♕");board.put("E1", "♔");board.put("F1", "♗");board.put("G1", "♘");board.put("H1", "♖");
         board.put("A2", "♙");board.put("B2", "♙");board.put("C2", "♙");board.put("D2", "♙");board.put("E2", "♙");board.put("F2", "♙");board.put("G2", "♙");board.put("H2", "♙");
         board.put("A3", "");board.put("B3", "");board.put("C3", "");board.put("D3", "");board.put("E3", "");board.put("F3", "");board.put("G3", "");board.put("H3", "");
@@ -54,7 +54,7 @@ public class GameController {
         if (msgList != null) {
             msgList.add(outputMessage);
         } else {
-            msgList = Arrays.asList(outputMessage);
+            msgList = Collections.singletonList(outputMessage);
         }
         logger.info("Message sent");
         return outputMessage;
