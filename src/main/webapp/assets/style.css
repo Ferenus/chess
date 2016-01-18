@@ -145,10 +145,14 @@ hr {
   float: left;
   width: 80px;
   height: 80px;
-  background-color: lightgreen;
+  background: lightgreen;
   font-size:50px;
   text-align:center;
   display: table-cell;
   vertical-align:middle;
   border: 1px solid green;
+}
+
+.mouseon {
+  background: #1c82dd;
 }

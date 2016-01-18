@@ -1,9 +1,9 @@
 $(".white, .black").mouseenter(function () {
     if (!$(this).hasClass("selected")) {
-        $(this).css("background", "#1c82dd");
+        $(this).addClass("mouseon");
     }
 }).mouseleave(function () {
-    $(this).css("background", "");
+    $(this).removeClass("mouseon");
 });
 
 

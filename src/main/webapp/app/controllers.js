@@ -27,7 +27,7 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
             GameService.sendMove(chessPiece, start, end);
         } else if (element.innerText.length != 0) {
             element.classList.toggle("selected");
-            selected.css("background", "");
+            element.classList.remove("mouseon");
             GameService.sendSelection(element.id);
         }
     };
