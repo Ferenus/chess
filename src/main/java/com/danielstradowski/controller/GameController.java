@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.*;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/game")
 public class GameController {
 
     private static final Map<String, String> board;
