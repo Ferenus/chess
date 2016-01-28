@@ -71,7 +71,7 @@
             merciless." - Magnus Carlsen</p>
 
         <div class="action-wrapper">
-            <a href="game" class="cd-btn main-action">Play</a>
+            <a href="tables" class="cd-btn main-action">Play</a>
             <a href="#0" class="cd-btn">Log out</a>
         </div>
 
