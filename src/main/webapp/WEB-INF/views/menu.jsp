@@ -72,7 +72,7 @@
 
         <div class="action-wrapper">
             <a href="tables" class="cd-btn main-action">Play</a>
-            <a href="#0" class="cd-btn">Log out</a>
+            <a href="game" class="cd-btn">Log out</a>
         </div>
 
         <div class="cd-bg-video-wrapper" data-video="assets/video">
