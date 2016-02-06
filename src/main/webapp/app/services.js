@@ -13,9 +13,17 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
     service.MOVE_BROKER = "/app/move";
     service.SELECTION_BROKER = "/app/selection";
     service.SELECTION_TOPIC = "/topic/selection";
+    service.COLOR_BROKER = "/app/color";
+    service.COLOR_TOPIC = "/topic/color";
 
     service.receive = function () {
         return listener.promise;
+    };
+
+    service.chooseColor = function (color) {
+        socket.stomp.send(service.COLOR_BROKER, {
+            priority: 9
+        }, color);
     };
 
     service.sendMessage = function (message) {
@@ -71,6 +79,10 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
         return out;
     };
 
+    var getColor = function (data) {
+        return JSON.parse(data);
+    };
+
     var getMove = function (data) {
         var move = JSON.parse(data), out = {};
         out.chessPiece = move.chessPiece;
@@ -104,6 +116,9 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
         });
         socket.stomp.subscribe(service.SELECTION_TOPIC, function (data) {
             listener.notify(getSelection(data.body));
+        });
+        socket.stomp.subscribe(service.COLOR_TOPIC, function (data) {
+            listener.notify(getColor(data.body));
         });
     };
 

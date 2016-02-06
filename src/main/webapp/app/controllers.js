@@ -50,5 +50,17 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
             }
         }
     });
+}).controller("SideCtrl", function ($scope, GameService) {
+    $scope.chooseSide = function (color) {
+        GameService.chooseColor(color);
+    };
+
+    GameService.receive().then(null, null, function (color) {
+        if (color === "white") {
+
+        } else if (color === "black") {
+
+        }
+    });
 });
 

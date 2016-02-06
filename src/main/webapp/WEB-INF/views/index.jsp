@@ -1,7 +1,7 @@
 <%--@elvariable id="board" type="java"--%>
 <%--@elvariable id="selection" type="java"--%>
 <%--@elvariable id="msgList" type="java.util.List"--%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE HTML>
@@ -12,93 +12,105 @@
     <script src="libs/jquery/jquery.min.js"></script>
 </head>
 <script language="javascript">
-window.onload = function () {
-    var selection = "${selection}";
-    var board = ${board};
-    if (selection != "off" && selection != null) {
-        $("#" + selection).toggleClass("selected");
-    }
-    $.each( board, function(index,value){
-        $("#" + index).text(value);
-    })
-};
+    window.onload = function () {
+        var selection = "${selection}";
+        var board = ${board};
+        if (selection != "off" && selection != null) {
+            $("#" + selection).toggleClass("selected");
+        }
+        $.each(board, function (index, value) {
+            $("#" + index).text(value);
+        });
+
+        $(".close").click(function(){
+            $("#myModal").css('display', 'none');
+        });
+        $("#buttonWhite").click(function(){
+            $("#myModal").css('display', 'none');
+
+        });
+        $("#buttonBlack").click(function(){
+            $("#myModal").css('display', 'none');
+
+        });
+    };
 </script>
 <body ng-app="chatApp">
 <div class="parent">
     <div ng-controller="MoveCtrl" class="chessboard">
         <div ng-click="addMove($event)">
-        <!-- 8st -->
-        <div class="white" id="A8"></div>
-        <div class="black" id="B8"></div>
-        <div class="white" id="C8"></div>
-        <div class="black" id="D8"></div>
-        <div class="white" id="E8"></div>
-        <div class="black" id="F8"></div>
-        <div class="white" id="G8"></div>
-        <div class="black" id="H8"></div>
-        <!-- 7nd -->
-        <div class="black" id="A7"></div>
-        <div class="white" id="B7"></div>
-        <div class="black" id="C7"></div>
-        <div class="white" id="D7"></div>
-        <div class="black" id="E7"></div>
-        <div class="white" id="F7"></div>
-        <div class="black" id="G7"></div>
-        <div class="white" id="H7"></div>
-        <!-- 6th -->
-        <div class="white" id="A6"></div>
-        <div class="black" id="B6"></div>
-        <div class="white" id="C6"></div>
-        <div class="black" id="D6"></div>
-        <div class="white" id="E6"></div>
-        <div class="black" id="F6"></div>
-        <div class="white" id="G6"></div>
-        <div class="black" id="H6"></div>
-        <!-- 5st -->
-        <div class="black" id="A5"></div>
-        <div class="white" id="B5"></div>
-        <div class="black" id="C5"></div>
-        <div class="white" id="D5"></div>
-        <div class="black" id="E5"></div>
-        <div class="white" id="F5"></div>
-        <div class="black" id="G5"></div>
-        <div class="white" id="H5"></div>
-        <!-- 4th -->
-        <div class="white" id="A4"></div>
-        <div class="black" id="B4"></div>
-        <div class="white" id="C4"></div>
-        <div class="black" id="D4"></div>
-        <div class="white" id="E4"></div>
-        <div class="black" id="F4"></div>
-        <div class="white" id="G4"></div>
-        <div class="black" id="H4"></div>
-        <!-- 3th -->
-        <div class="black" id="A3"></div>
-        <div class="white" id="B3"></div>
-        <div class="black" id="C3"></div>
-        <div class="white" id="D3"></div>
-        <div class="black" id="E3"></div>
-        <div class="white" id="F3"></div>
-        <div class="black" id="G3"></div>
-        <div class="white" id="H3"></div>
-        <!-- 2th -->
-        <div class="white" id="A2"></div>
-        <div class="black" id="B2"></div>
-        <div class="white" id="C2"></div>
-        <div class="black" id="D2"></div>
-        <div class="white" id="E2"></div>
-        <div class="black" id="F2"></div>
-        <div class="white" id="G2"></div>
-        <div class="black" id="H2"></div>
-        <!-- 1th -->
-        <div class="black" id="A1"></div>
-        <div class="white" id="B1"></div>
-        <div class="black" id="C1"></div>
-        <div class="white" id="D1"></div>
-        <div class="black" id="E1"></div>
-        <div class="white" id="F1"></div>
-        <div class="black" id="G1"></div>
-        <div class="white" id="H1"></div>
+            <!-- 8st -->
+            <div class="white" id="A8"></div>
+            <div class="black" id="B8"></div>
+            <div class="white" id="C8"></div>
+            <div class="black" id="D8"></div>
+            <div class="white" id="E8"></div>
+            <div class="black" id="F8"></div>
+            <div class="white" id="G8"></div>
+            <div class="black" id="H8"></div>
+            <!-- 7nd -->
+            <div class="black" id="A7"></div>
+            <div class="white" id="B7"></div>
+            <div class="black" id="C7"></div>
+            <div class="white" id="D7"></div>
+            <div class="black" id="E7"></div>
+            <div class="white" id="F7"></div>
+            <div class="black" id="G7"></div>
+            <div class="white" id="H7"></div>
+            <!-- 6th -->
+            <div class="white" id="A6"></div>
+            <div class="black" id="B6"></div>
+            <div class="white" id="C6"></div>
+            <div class="black" id="D6"></div>
+            <div class="white" id="E6"></div>
+            <div class="black" id="F6"></div>
+            <div class="white" id="G6"></div>
+            <div class="black" id="H6"></div>
+            <!-- 5st -->
+            <div class="black" id="A5"></div>
+            <div class="white" id="B5"></div>
+            <div class="black" id="C5"></div>
+            <div class="white" id="D5"></div>
+            <div class="black" id="E5"></div>
+            <div class="white" id="F5"></div>
+            <div class="black" id="G5"></div>
+            <div class="white" id="H5"></div>
+            <!-- 4th -->
+            <div class="white" id="A4"></div>
+            <div class="black" id="B4"></div>
+            <div class="white" id="C4"></div>
+            <div class="black" id="D4"></div>
+            <div class="white" id="E4"></div>
+            <div class="black" id="F4"></div>
+            <div class="white" id="G4"></div>
+            <div class="black" id="H4"></div>
+            <!-- 3th -->
+            <div class="black" id="A3"></div>
+            <div class="white" id="B3"></div>
+            <div class="black" id="C3"></div>
+            <div class="white" id="D3"></div>
+            <div class="black" id="E3"></div>
+            <div class="white" id="F3"></div>
+            <div class="black" id="G3"></div>
+            <div class="white" id="H3"></div>
+            <!-- 2th -->
+            <div class="white" id="A2"></div>
+            <div class="black" id="B2"></div>
+            <div class="white" id="C2"></div>
+            <div class="black" id="D2"></div>
+            <div class="white" id="E2"></div>
+            <div class="black" id="F2"></div>
+            <div class="white" id="G2"></div>
+            <div class="black" id="H2"></div>
+            <!-- 1th -->
+            <div class="black" id="A1"></div>
+            <div class="white" id="B1"></div>
+            <div class="black" id="C1"></div>
+            <div class="white" id="D1"></div>
+            <div class="black" id="E1"></div>
+            <div class="white" id="F1"></div>
+            <div class="black" id="G1"></div>
+            <div class="white" id="H1"></div>
         </div>
     </div>
 
@@ -118,10 +130,24 @@ window.onload = function () {
         </p>
         <c:forEach items="${msgList}" var="message">
             <p class="message">
-            <time><fmt:formatDate pattern="HH:mm" value="${message.time}" /></time>
-            <span>${message.message}</span>
+                <time><fmt:formatDate pattern="HH:mm" value="${message.time}"/></time>
+                <span>${message.message}</span>
             </p>
         </c:forEach>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content" ng-controller="SideCtrl">
+            <span class="close">x</span>
+
+            <p>Choose color:</p>
+            <button ng-click="chooseSide('white')">&#9812;White</button>
+            <button style="color: black" ng-click="chooseSide('black')">&#9818;Black</button>
+        </div>
+
     </div>
 </div>
 
