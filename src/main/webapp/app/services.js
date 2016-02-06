@@ -13,6 +13,8 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
     service.MOVE_BROKER = "/app/move";
     service.SELECTION_BROKER = "/app/selection";
     service.SELECTION_TOPIC = "/topic/selection";
+    service.NEW_GAME_BROKER = "/app/newgame";
+    service.NEW_GAME_TOPIC = "/topic/newgame";
 
     service.receive = function () {
         return listener.promise;
@@ -51,6 +53,14 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
             id: id
         }));
         ids.push(id);
+    };
+
+    service.createGame = function () {
+        socket.stomp.send(service.NEW_GAME_BROKER, {
+            priority: 9
+        }, JSON.stringify({
+            id: "aaa"
+        }));
     };
 
     var reconnect = function () {
