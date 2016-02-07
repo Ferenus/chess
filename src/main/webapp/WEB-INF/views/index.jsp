@@ -1,6 +1,7 @@
 <%--@elvariable id="board" type="java"--%>
 <%--@elvariable id="selection" type="java"--%>
 <%--@elvariable id="msgList" type="java.util.List"--%>
+<%--@elvariable id="color" type="java"--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -22,17 +23,18 @@
             $("#" + index).text(value);
         });
 
-        $(".close").click(function(){
+        $(".close").click(function () {
             $("#myModal").css('display', 'none');
         });
-        $("#buttonWhite").click(function(){
-            $("#myModal").css('display', 'none');
-
-        });
-        $("#buttonBlack").click(function(){
+        $("#buttonWhite").click(function () {
             $("#myModal").css('display', 'none');
 
         });
+        $("#buttonBlack").click(function () {
+            $("#myModal").css('display', 'none');
+
+        });
+        //alert(${color});
     };
 </script>
 <body ng-app="chatApp">
@@ -115,6 +117,14 @@
     </div>
 
     <div ng-controller="ChatCtrl" class="container">
+        <div id="color">
+            <c:if test="${color=='white'}">
+                You're playing white.
+            </c:if>
+            <c:if test="${color=='black'}">
+                You're playing black.
+            </c:if>
+        </div>
         <form ng-submit="addMessage()" name="messageForm">
             <input type="text" placeholder="Compose a new message..." ng-model="message"/>
 
@@ -137,8 +147,8 @@
     </div>
 
     <!-- The Modal -->
+    <c:if test="${color==null}">
     <div id="myModal" class="modal">
-
         <!-- Modal content -->
         <div class="modal-content" ng-controller="SideCtrl">
             <span class="close">x</span>
@@ -147,8 +157,9 @@
             <button ng-click="chooseSide('white')">&#9812;White</button>
             <button style="color: black" ng-click="chooseSide('black')">&#9818;Black</button>
         </div>
-
+    </c:if>
     </div>
+
 </div>
 
 <script src="libs/jquery/jquery-1.11.0.min.js"></script>

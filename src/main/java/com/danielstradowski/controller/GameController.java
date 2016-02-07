@@ -8,12 +8,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.context.request.RequestContextHolder;
 
-import javax.servlet.http.HttpSession;
 import java.util.*;
 
 @Controller
@@ -92,11 +93,20 @@ public class GameController {
 
     private static List<OutputMessage> msgList = new ArrayList<>();
     private static String selection;
-    private static Map<HttpSession, HttpSession> game;
+    private static Map<String, String> game = new HashMap<>();
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     @RequestMapping(method = RequestMethod.GET)
     public String viewApplication(Model model) {
+        String sessionId = RequestContextHolder.currentRequestAttributes().getSessionId();
+        if (!game.isEmpty()) {
+            String key = (String) game.keySet().toArray()[0];
+            if (sessionId.equals(key)) {
+                model.addAttribute("color", "white");
+            } else if (sessionId.equals(game.get(key))){
+                model.addAttribute("msgList", "black");
+            }
+        }
         List<OutputMessage> copy = new ArrayList<>(msgList);
         Collections.reverse(copy);
         model.addAttribute("msgList", copy);
@@ -138,14 +148,15 @@ public class GameController {
 
     @MessageMapping("/color")
     @SendTo("/topic/color")
-    public String chooseColor(String color) {
-        //how to pass here session?
+    public String chooseColor(SimpMessageHeaderAccessor headerAccessor, String color) {
+        //how to get the same session id here as in get method?
+        String sessionId = headerAccessor.getSessionId();
         logger.info("Color chosen");
         if (color.equals("white")) {
-            game.put(null, null);
+            game.put(sessionId, null);
         } else if (color.equals("black")) {
-            //Object key = game.keySet().toArray()[0];
-            game.put(null, null);
+            String key = (String)game.keySet().toArray()[0];
+            game.put(key, sessionId);
         }
         return color;
     }

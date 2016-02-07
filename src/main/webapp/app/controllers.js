@@ -15,10 +15,20 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
     });
 }).controller("MoveCtrl", function ($scope, GameService) {
     $scope.addMove = function (event) {
+        var whitePieces = ["♙", "♖", "♘", "♗", "♔", "♕"];
+        var blackPieces = ["♟", "♜", "♞", "♝", "♚", "♛"];
+        var colorSel = $("#color");
+        var color = null;
+        if (colorSel.html().indexOf("white") >= 0) {
+            color = "white";
+        } else if (colorSel.html().indexOf("black") >= 0) {
+            color = "black";
+        }
         var element = event.target;
         var selected = $(".selected");
+        var chessPiece;
         if (selected.length != 0) {
-            var chessPiece = selected.html();
+            chessPiece = selected.html();
             var start = selected.attr('id');
             selected.empty().toggleClass("selected");
             GameService.sendSelection("off");
@@ -26,9 +36,18 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
             var end = element.id;
             GameService.sendMove(chessPiece, start, end);
         } else if (element.innerText.length != 0) {
-            element.classList.toggle("selected");
-            element.classList.remove("mouseon");
-            GameService.sendSelection(element.id);
+            chessPiece = $(".mouseon").html();
+            var makeMove;
+            if (color === "white") {
+                makeMove = $.inArray(chessPiece, whitePieces);
+            } else if (color === "black") {
+                makeMove = $.inArray(chessPiece, blackPieces);
+            }
+            if (makeMove >= 0) {
+                element.classList.toggle("selected");
+                element.classList.remove("mouseon");
+                GameService.sendSelection(element.id);
+            }
         }
     };
 
@@ -57,9 +76,11 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
 
     GameService.receive().then(null, null, function (color) {
         if (color === "white") {
-
+            $("#color").text("You're playing white.");
+            $("#myModal").css('display', 'none');
         } else if (color === "black") {
-
+            $("#color").text("You're playing black.");
+            $("#myModal").css('display', 'none');
         }
     });
 });

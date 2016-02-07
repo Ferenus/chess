@@ -80,7 +80,7 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
     };
 
     var getColor = function (data) {
-        return JSON.parse(data);
+        return data;
     };
 
     var getMove = function (data) {
