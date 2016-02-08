@@ -1,5 +1,6 @@
 package com.danielstradowski.controller;
 
+import com.danielstradowski.dto.Color;
 import com.danielstradowski.dto.Message;
 import com.danielstradowski.dto.Move;
 import com.danielstradowski.dto.OutputMessage;
@@ -8,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
-import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -101,10 +101,18 @@ public class GameController {
         String sessionId = RequestContextHolder.currentRequestAttributes().getSessionId();
         if (!game.isEmpty()) {
             String key = (String) game.keySet().toArray()[0];
+            String value = game.get(key);
             if (sessionId.equals(key)) {
                 model.addAttribute("color", "white");
-            } else if (sessionId.equals(game.get(key))){
-                model.addAttribute("msgList", "black");
+            } else if (sessionId.equals(value)){
+                model.addAttribute("color", "black");
+            } else if (key==null){
+                model.addAttribute("color", "white");
+                game.remove(null);
+                game.put(sessionId, value);
+            } else if (value==null) {
+                model.addAttribute("color", "black");
+                game.put(key, sessionId);
             }
         }
         List<OutputMessage> copy = new ArrayList<>(msgList);
@@ -113,6 +121,7 @@ public class GameController {
         model.addAttribute("selection", selection);
         JSONObject mapAsJson = new JSONObject(board);
         model.addAttribute("board", mapAsJson.toString());
+        model.addAttribute("sessionId", sessionId);
         return "index";
     }
 
@@ -148,16 +157,18 @@ public class GameController {
 
     @MessageMapping("/color")
     @SendTo("/topic/color")
-    public String chooseColor(SimpMessageHeaderAccessor headerAccessor, String color) {
-        //how to get the same session id here as in get method?
-        String sessionId = headerAccessor.getSessionId();
+    public Color chooseColor(Color color) {
         logger.info("Color chosen");
-        if (color.equals("white")) {
-            game.put(sessionId, null);
-        } else if (color.equals("black")) {
-            String key = (String)game.keySet().toArray()[0];
-            game.put(key, sessionId);
+        int gameSize = game.size();
+        if (color.getColor().equals("white")) {
+            if (gameSize == 0) {
+                game.put(color.getSessionId(), null);
+            }
+        } else if (color.getColor().equals("black")) {
+            if (gameSize == 0) {
+                game.put(null, color.getSessionId());
+            }
         }
-        return color;
+        return gameSize==0?color:null;
     }
 }

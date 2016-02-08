@@ -70,17 +70,31 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
         }
     });
 }).controller("SideCtrl", function ($scope, GameService) {
-    $scope.chooseSide = function (color) {
-        GameService.chooseColor(color);
+    var sessionId;
+    $scope.chooseSide = function (sessiondId, color) {
+        GameService.chooseColor(sessiondId, color);
+        sessionId = sessiondId;
     };
 
     GameService.receive().then(null, null, function (color) {
-        if (color === "white") {
-            $("#color").text("You're playing white.");
-            $("#myModal").css('display', 'none');
-        } else if (color === "black") {
-            $("#color").text("You're playing black.");
-            $("#myModal").css('display', 'none');
+        if (color != null) {
+            if (sessionId == color.sessionId) {
+                if (color.color === "white") {
+                    $("#color").text("You're playing white.");
+                    $("#myModal").css('display', 'none');
+                } else if (color.color === "black") {
+                    $("#color").text("You're playing black.");
+                    $("#myModal").css('display', 'none');
+                }
+            } else {
+                if (color.color === "white") {
+                    $("#color").text("You're playing black.");
+                    $("#myModal").css('display', 'none');
+                } else if (color.color === "black") {
+                    $("#color").text("You're playing white.");
+                    $("#myModal").css('display', 'none');
+                }
+            }
         }
     });
 });

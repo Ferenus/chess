@@ -2,6 +2,7 @@
 <%--@elvariable id="selection" type="java"--%>
 <%--@elvariable id="msgList" type="java.util.List"--%>
 <%--@elvariable id="color" type="java"--%>
+<%--@elvariable id="sessionId" type="java"--%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -154,8 +155,8 @@
             <span class="close">x</span>
 
             <p>Choose color:</p>
-            <button ng-click="chooseSide('white')">&#9812;White</button>
-            <button style="color: black" ng-click="chooseSide('black')">&#9818;Black</button>
+            <button ng-click="chooseSide('${sessionId}','white')">&#9812;White</button>
+            <button style="color: black" ng-click="chooseSide('${sessionId}','black')">&#9818;Black</button>
         </div>
     </c:if>
     </div>

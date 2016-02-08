@@ -20,10 +20,13 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
         return listener.promise;
     };
 
-    service.chooseColor = function (color) {
+    service.chooseColor = function (sessionId, color) {
         socket.stomp.send(service.COLOR_BROKER, {
             priority: 9
-        }, color);
+        }, JSON.stringify({
+            sessionId: sessionId,
+            color: color
+        }));
     };
 
     service.sendMessage = function (message) {
@@ -80,7 +83,7 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
     };
 
     var getColor = function (data) {
-        return data;
+        return JSON.parse(data);
     };
 
     var getMove = function (data) {
