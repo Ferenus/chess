@@ -35,7 +35,6 @@
             $("#myModal").css('display', 'none');
 
         });
-        //alert(${color});
     };
 </script>
 <body ng-app="chatApp">
@@ -118,7 +117,7 @@
     </div>
 
     <div ng-controller="ChatCtrl" class="container">
-        <div id="color">
+        <div id="color" style="float: left">
             <c:if test="${color=='white'}">
                 You're playing white.
             </c:if>
@@ -126,6 +125,8 @@
                 You're playing black.
             </c:if>
         </div>
+        <button ng-click="restartGame()" style="float: right">Restart game</button>
+
         <form ng-submit="addMessage()" name="messageForm">
             <input type="text" placeholder="Compose a new message..." ng-model="message"/>
 
@@ -158,7 +159,7 @@
             <button ng-click="chooseSide('${sessionId}','white')">&#9812;White</button>
             <button style="color: black" ng-click="chooseSide('${sessionId}','black')">&#9818;Black</button>
         </div>
-    </c:if>
+        </c:if>
     </div>
 
 </div>

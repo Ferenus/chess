@@ -21,10 +21,19 @@ import java.util.*;
 @RequestMapping("/game")
 public class GameController {
 
-    private static final Map<String, String> board;
+    private static final HashMap<String, String> board;
 
     static {
         board = new HashMap<>();
+        restart(board);
+    }
+
+    private static List<OutputMessage> msgList = new ArrayList<>();
+    private static String selection;
+    private static Map<String, String> game = new HashMap<>();
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
+    private static HashMap restart(HashMap<String, String> board){
         board.put("A1", "♖");
         board.put("B1", "♘");
         board.put("C1", "♗");
@@ -89,12 +98,8 @@ public class GameController {
         board.put("F8", "♝");
         board.put("G8", "♞");
         board.put("H8", "♜");
+        return board;
     }
-
-    private static List<OutputMessage> msgList = new ArrayList<>();
-    private static String selection;
-    private static Map<String, String> game = new HashMap<>();
-    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @RequestMapping(method = RequestMethod.GET)
     public String viewApplication(Model model) {
@@ -170,5 +175,13 @@ public class GameController {
             }
         }
         return gameSize==0?color:null;
+    }
+
+    @MessageMapping("/restart")
+    @SendTo("/topic/restart")
+    public String restart() {
+        logger.info("Game restarted");
+        restart(board);
+        return new JSONObject(board).toString();
     }
 }

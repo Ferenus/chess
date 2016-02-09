@@ -15,6 +15,8 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
     service.SELECTION_TOPIC = "/topic/selection";
     service.COLOR_BROKER = "/app/color";
     service.COLOR_TOPIC = "/topic/color";
+    service.RESTART_BROKER = "/app/restart";
+    service.RESTART_TOPIC = "/topic/restart";
 
     service.receive = function () {
         return listener.promise;
@@ -38,6 +40,12 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
             id: id
         }));
         ids.push(id);
+    };
+
+    service.restart = function () {
+        socket.stomp.send(service.RESTART_BROKER, {
+            priority: 9
+        });
     };
 
     service.sendMove = function (chessPiece, start, end) {
@@ -90,6 +98,13 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
         return out;
     };
 
+    var getRefresh = function (data) {
+        var out = {};
+        out.action = "refresh";
+        out.board = data;
+        return out;
+    };
+
     var getMove = function (data) {
         var move = JSON.parse(data), out = {};
         out.chessPiece = move.chessPiece;
@@ -126,6 +141,9 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
         });
         socket.stomp.subscribe(service.COLOR_TOPIC, function (data) {
             listener.notify(getColor(data.body));
+        });
+        socket.stomp.subscribe(service.RESTART_TOPIC, function (data) {
+            listener.notify(getRefresh(data.body));
         });
     };
 

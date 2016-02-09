@@ -8,10 +8,20 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
         $scope.message = "";
     };
 
+    $scope.restartGame = function () {
+        GameService.restart();
+    };
+
     GameService.receive().then(null, null, function (message) {
         if (message.action === "message") {
             $scope.messages.push(message);
         }
+        if (message.action === "refresh") {
+            $.each(jQuery.parseJSON(message.board), function (index, value) {
+                $("#" + index).text(value);
+            });
+        }
+
     });
 }).controller("MoveCtrl", function ($scope, GameService) {
     $scope.addMove = function (event) {
