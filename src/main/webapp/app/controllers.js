@@ -77,7 +77,7 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
     };
 
     GameService.receive().then(null, null, function (color) {
-        if (color != null) {
+        if (color != null && color.action === "chooseColor") {
             if (sessionId == color.sessionId) {
                 if (color.color === "white") {
                     $("#color").text("You're playing white.");

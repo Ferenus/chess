@@ -83,7 +83,11 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
     };
 
     var getColor = function (data) {
-        return JSON.parse(data);
+        var move = JSON.parse(data), out = {};
+        out.sessionId = move.sessionId;
+        out.color = move.color;
+        out.action = "chooseColor";
+        return out;
     };
 
     var getMove = function (data) {
