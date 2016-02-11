@@ -21,7 +21,6 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
                 $("#" + index).text(value);
             });
         }
-
     });
 }).controller("MoveCtrl", function ($scope, GameService) {
     $scope.addMove = function (event) {
@@ -88,21 +87,24 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
 
     GameService.receive().then(null, null, function (color) {
         if (color != null && color.action === "chooseColor") {
+            $("#myModal").css('display', 'none');
             if (sessionId == color.sessionId) {
                 if (color.color === "white") {
                     $("#color").text("You're playing white.");
-                    $("#myModal").css('display', 'none');
                 } else if (color.color === "black") {
                     $("#color").text("You're playing black.");
-                    $("#myModal").css('display', 'none');
+                }
+                if (color.wait) {
+                    $("#myModal2").css('display', '');
                 }
             } else {
                 if (color.color === "white") {
                     $("#color").text("You're playing black.");
-                    $("#myModal").css('display', 'none');
                 } else if (color.color === "black") {
                     $("#color").text("You're playing white.");
-                    $("#myModal").css('display', 'none');
+                }
+                if (color.wait) {
+                    $("#myModal2").css('display', '');
                 }
             }
         }

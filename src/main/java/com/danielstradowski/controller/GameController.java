@@ -111,14 +111,23 @@ public class GameController {
                 model.addAttribute("color", "white");
             } else if (sessionId.equals(value)){
                 model.addAttribute("color", "black");
-            } else if (key==null){
+            } else if (key==null && value !=null){
                 model.addAttribute("color", "white");
                 game.remove(null);
                 game.put(sessionId, value);
-            } else if (value==null) {
+            } else if (value==null && key !=null) {
                 model.addAttribute("color", "black");
                 game.put(key, sessionId);
             }
+            key = (String) game.keySet().toArray()[0];
+            value = game.get(key);
+            if (key!= null && value!=null){
+                model.addAttribute("wait", false);
+            } else {
+                model.addAttribute("wait", true);
+            }
+        } else {
+            model.addAttribute("wait", true);
         }
         List<OutputMessage> copy = new ArrayList<>(msgList);
         Collections.reverse(copy);
@@ -162,16 +171,22 @@ public class GameController {
 
     @MessageMapping("/color")
     @SendTo("/topic/color")
-    public Color chooseColor(Color color) {
+    public synchronized Color chooseColor(Color color) {
         logger.info("Color chosen");
         int gameSize = game.size();
         if (color.getColor().equals("white")) {
             if (gameSize == 0) {
                 game.put(color.getSessionId(), null);
+                color.setWait(true);
+            } else {
+                color = getWhatsLeft(color);
             }
         } else if (color.getColor().equals("black")) {
             if (gameSize == 0) {
                 game.put(null, color.getSessionId());
+                color.setWait(true);
+            } else {
+                color = getWhatsLeft(color);
             }
         }
         return gameSize==0?color:null;
@@ -183,5 +198,18 @@ public class GameController {
         logger.info("Game restarted");
         restart(board);
         return new JSONObject(board).toString();
+    }
+
+    private Color getWhatsLeft(Color color){
+        String key = (String) game.keySet().toArray()[0];
+        String value = game.get(key);
+        if (key==null && value !=null){
+            game.remove(null);
+            game.put(color.getSessionId(), value);
+        } else if (value==null && key != null) {
+            game.put(key, color.getSessionId());
+        }
+        color.setWait(false);
+        return color;
     }
 }

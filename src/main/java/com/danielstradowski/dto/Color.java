@@ -6,6 +6,7 @@ package com.danielstradowski.dto;
 public class Color {
     private String sessionId;
     private String color;
+    private boolean wait;
 
     public Color() {
     }
@@ -13,6 +14,7 @@ public class Color {
     public Color(String sessionId, String color) {
         this.sessionId = sessionId;
         this.color = color;
+        this.wait = wait;
     }
 
     public String getSessionId() {
@@ -29,5 +31,13 @@ public class Color {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public boolean getWait() {
+        return wait;
+    }
+
+    public void setWait(boolean wait) {
+        this.wait = wait;
     }
 }

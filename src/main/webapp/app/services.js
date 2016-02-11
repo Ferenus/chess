@@ -27,7 +27,8 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
             priority: 9
         }, JSON.stringify({
             sessionId: sessionId,
-            color: color
+            color: color,
+            wait: true
         }));
     };
 
@@ -91,9 +92,10 @@ angular.module("chatApp.services").service("GameService", function ($q, $timeout
     };
 
     var getColor = function (data) {
-        var move = JSON.parse(data), out = {};
-        out.sessionId = move.sessionId;
-        out.color = move.color;
+        var color = JSON.parse(data), out = {};
+        out.sessionId = color.sessionId;
+        out.color = color.color;
+        out.wait = color.wait;
         out.action = "chooseColor";
         return out;
     };
