@@ -19,6 +19,7 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
         if (message.action === "refresh") {
             $.each(jQuery.parseJSON(message.board), function (index, value) {
                 $("#" + index).text(value);
+                $("#myModal").css('display', '');
             });
         }
     });

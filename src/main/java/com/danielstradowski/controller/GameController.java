@@ -103,6 +103,7 @@ public class GameController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String viewApplication(Model model) {
+        //new attribute to change display from none to ''
         String sessionId = RequestContextHolder.currentRequestAttributes().getSessionId();
         if (!game.isEmpty()) {
             String key = (String) game.keySet().toArray()[0];
@@ -126,8 +127,6 @@ public class GameController {
             } else {
                 model.addAttribute("wait", true);
             }
-        } else {
-            model.addAttribute("wait", true);
         }
         List<OutputMessage> copy = new ArrayList<>(msgList);
         Collections.reverse(copy);
@@ -197,6 +196,7 @@ public class GameController {
     public String restart() {
         logger.info("Game restarted");
         restart(board);
+        game.clear();
         return new JSONObject(board).toString();
     }
 

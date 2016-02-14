@@ -150,26 +150,22 @@
     </div>
 
     <!-- The Modal -->
-    <c:if test="${color==null}">
-        <div id="myModal" class="modal">
-            <!-- Modal content -->
-            <div class="modal-content" ng-controller="SideCtrl">
-                <span class="close">x</span>
+    <div id="myModal" class="modal" style="<c:if test="${color!=null}">display: none</c:if>">
+        <!-- Modal content -->
+        <div class="modal-content" ng-controller="SideCtrl">
+            <span class="close">x</span>
 
-                <p>Choose color:</p>
-                <button ng-click="chooseSide('${sessionId}','white')">&#9812;White</button>
-                <button style="color: black" ng-click="chooseSide('${sessionId}','black')">&#9818;Black</button>
-            </div>
+            <p>Choose color:</p>
+            <button ng-click="chooseSide('${sessionId}','white')">&#9812;White</button>
+            <button style="color: black" ng-click="chooseSide('${sessionId}','black')">&#9818;Black</button>
         </div>
-    </c:if>
+    </div>
 
-    <c:if test="${wait==true}">
-        <div id="myModal2" class="modal" style="display: none">
-            <div class="modal-content"
+    <div id="myModal2" class="modal" style="<c:if test="${wait!=true}">display: none</c:if>">
+        <div class="modal-content">
             <p>Wait for other player to connect...</p>
-            </div>
         </div>
-    </c:if>
+    </div>
 </div>
 
 <script src="libs/jquery/jquery-1.11.0.min.js"></script>
