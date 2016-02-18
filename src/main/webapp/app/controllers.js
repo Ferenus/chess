@@ -42,10 +42,10 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
             var start = selected.attr('id');
             selected.empty().toggleClass("selected");
             GameService.sendSelection("off");
-            element.innerText = chessPiece;
+            $(element).text(chessPiece);
             var end = element.id;
             GameService.sendMove(chessPiece, start, end);
-        } else if (element.innerText.length != 0) {
+        } else if ($(element).text().length != 0) {
             chessPiece = $(".mouseon").html();
             var makeMove;
             if (color === "white") {

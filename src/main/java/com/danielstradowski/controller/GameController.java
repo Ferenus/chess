@@ -221,6 +221,7 @@ public class GameController {
         restart(board);
         game.clear();
         waitQueue.clear();
+        msgList.clear();
         return new JSONObject(board).toString();
     }
 
