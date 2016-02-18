@@ -87,6 +87,19 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
     };
 
     GameService.receive().then(null, null, function (color) {
+        var displayMyModal2 = function() {
+            $("#myModal2").css('display', '');
+            var intervalId = setInterval(myFun, 2000);
+            function myFun() {
+                var url = "/chess/game/start";
+                $.get(url, null, function (data) {
+                    if (data) {
+                        $("#myModal2").css('display', 'none');
+                        clearInterval(intervalId);
+                    }
+                });
+            }
+        };
         if (color != null && color.action === "chooseColor") {
             $("#myModal").css('display', 'none');
             if (sessionId == color.sessionId) {
@@ -96,7 +109,7 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
                     $("#color").text("You're playing black.");
                 }
                 if (color.wait) {
-                    $("#myModal2").css('display', '');
+                    displayMyModal2();
                 }
             } else {
                 if (color.color === "white") {
@@ -105,7 +118,7 @@ angular.module("chatApp.controllers").controller("ChatCtrl", function ($scope, G
                     $("#color").text("You're playing white.");
                 }
                 if (color.wait) {
-                    $("#myModal2").css('display', '');
+                    displayMyModal2();
                 }
             }
         }

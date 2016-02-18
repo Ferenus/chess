@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestContextHolder;
 
 import java.util.*;
@@ -31,6 +32,7 @@ public class GameController {
     private static List<OutputMessage> msgList = new ArrayList<>();
     private static String selection;
     private static Map<String, String> game = new HashMap<>();
+    private static HashSet<String> waitQueue = new HashSet<>();
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     private static HashMap restart(HashMap<String, String> board){
@@ -103,7 +105,6 @@ public class GameController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String viewApplication(Model model) {
-        //new attribute to change display from none to ''
         String sessionId = RequestContextHolder.currentRequestAttributes().getSessionId();
         if (!game.isEmpty()) {
             String key = (String) game.keySet().toArray()[0];
@@ -149,6 +150,28 @@ public class GameController {
         }
         logger.info("Message sent");
         return outputMessage;
+    }
+
+    @RequestMapping(value = "/start", method=RequestMethod.GET)
+    public @ResponseBody
+    boolean waitForStart() {
+        logger.info("Checking if game started");
+        int gameSize = game.size();
+        boolean start = false;
+        if (gameSize != 0) {
+            String key = (String) game.keySet().toArray()[0];
+            String value = game.get(key);
+            if (key != null && value != null) {
+                start = true;
+            } else {
+                String sessionId = RequestContextHolder.currentRequestAttributes().getSessionId();
+                waitQueue.add(sessionId);
+                if (waitQueue.size()>1) {
+                    start = true;
+                }
+            }
+        }
+        return start;
     }
 
     @MessageMapping("/move")
@@ -197,6 +220,7 @@ public class GameController {
         logger.info("Game restarted");
         restart(board);
         game.clear();
+        waitQueue.clear();
         return new JSONObject(board).toString();
     }
 

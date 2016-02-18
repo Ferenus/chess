@@ -166,6 +166,22 @@
             <p>Wait for other player to connect...</p>
         </div>
     </div>
+    <c:if test="${wait==true}">
+        <script>
+            $(document).ready(function () {
+                var intervalId = setInterval(myFun, 2000);
+                function myFun() {
+                    var url = "/chess/game/start";
+                    $.get(url, null, function (data) {
+                        if (data) {
+                            $("#myModal2").css('display', 'none');
+                            clearInterval(intervalId);
+                        }
+                    });
+                }
+            });
+        </script>
+    </c:if>
 </div>
 
 <script src="libs/jquery/jquery-1.11.0.min.js"></script>
