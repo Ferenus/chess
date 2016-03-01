@@ -8,14 +8,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300,700,400' rel='stylesheet' type='text/css'>
 
-    <link rel="stylesheet" href="assets/reset.css">
-    <link rel="stylesheet" href="assets/style2.css">
-    <script src="libs/js/modernizr.js"></script>
+    <link rel="stylesheet" href="/chess/assets/reset.css">
+    <link rel="stylesheet" href="/chess/assets/style2.css">
+    <script src="/chess/libs/js/modernizr.js"></script>
 
     <title>Chess - play a game!</title>
 </head>
 <body>
-
+<script type='text/javascript'>
+    if (window.location.href === "http://danielstradowski.com/chess") {
+        location.href = "http://danielstradowski.com/chess/"
+    }
+</script>
 <section class="cd-intro video">
     <div class="cd-intro-content video">
         <h1 class="svg-wrapper">
@@ -81,8 +85,8 @@
     </div>
 </section>
 
-<script src="libs/jquery/jquery-1.11.0.min.js"></script>
-<script src="app/jquery.js"></script>
-<script src="libs/js/main.js"></script>
+<script src="/chess/libs/jquery/jquery-1.11.0.min.js"></script>
+<script src="/chess/app/jquery.js"></script>
+<script src="/chess/libs/js/main.js"></script>
 </body>
 </html>
