@@ -1,4 +1,4 @@
-Chess
+# Chess
 
 Real time chess game for two players with a real time chat.
 
